@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "The Intricacies Behind Our Applications"
-date:       2018-07-23 14:44:13 +0000
+date:       2018-07-23 10:44:14 -0400
 permalink:  the_intricacies_behind_our_applications
 ---
 

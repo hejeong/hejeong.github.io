@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Sinatra: Resell Your College Textbooks"
-date:       2018-08-24 20:01:45 +0000
+date:       2018-08-24 16:01:45 -0400
 permalink:  sinatra_resell_your_college_textbooks
 ---
 
@@ -13,13 +13,16 @@ I was inspired by my current experience in college. College is already so expens
 I used a ruby gem called Corneal (which is learn co scrambled) created by another Learn Verified student. Huge credits to the creator; I would check his awesome gem out! (https://github.com/thebrianemory/corneal) This gem helped create the basic file structure of a Sinatra application. It has many more functionalities, but I only used it to create the basic file tree, which follows the MVC (Model View Controller) structure. 
 
 It was actually pretty easy to get started. I began with the migrations and models, which is simple in my case because I only have users and textbook models. After that, everything come easily. The MVC structure enables you to focus on one thing at a time (separation of concerns) so I began with the login and sign up pages. First I wrote the users controller, and then built the necessary routes and view pages. Some routes would then redirect to the textbooks index page, and then I began writing in the textbooks controller to implement the CRUD actions (Create, Read, Update, and Destroy). Of course, you need to worry about validations, but I like to see what I have first, then build on top. So I built my minimum viable product, just having the basic operations, like filling out a form, creating or editing the object and save it to the database, and basic navigation tools. Validations were the trickiest part. The easy ones were checking to see if the input fields were blank, and if they were, don't allow them to. Then you have to check that only logged in users can view content. I found my self reusing a lot of code, so in my helper methods, I did all the logic and redirection in the method declarations. This was my solution:
-```def logged_in?
+```
+def logged_in?
       if session[:user_id] == nil
         flash[:message] = "Please login first."
         redirect to '/login'
       end
-      true
-    end``` 
+			true
+ end
+```
+ 
 Now, I could just insert one line of code to every place that requires this type of validation. Developer-friendly :)
 Then you had to check that only owners can edit or delete and textbook. This wasn't hard either, I hid the edit/delete buttons from the view page if you aren't the owner. The tricky parts are finding the "loopholes". I found that if you entered the url for the edit page, i.e. ```/textbooks/3/edit``` Then you can still get to the edit form. Obviously, we don't want this "feature" so the simple fix was checking the current user and see if it matches the textbook's owner. If not, you redirect to another page and use a flash message to warn them that you can't edit someone else's listing.
 

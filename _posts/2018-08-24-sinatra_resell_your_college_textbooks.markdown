@@ -15,12 +15,12 @@ I used a ruby gem called Corneal (which is learn co scrambled) created by anothe
 It was actually pretty easy to get started. I began with the migrations and models, which is simple in my case because I only have users and textbook models. After that, everything come easily. The MVC structure enables you to focus on one thing at a time (separation of concerns) so I began with the login and sign up pages. First I wrote the users controller, and then built the necessary routes and view pages. Some routes would then redirect to the textbooks index page, and then I began writing in the textbooks controller to implement the CRUD actions (Create, Read, Update, and Destroy). Of course, you need to worry about validations, but I like to see what I have first, then build on top. So I built my minimum viable product, just having the basic operations, like filling out a form, creating or editing the object and save it to the database, and basic navigation tools. Validations were the trickiest part. The easy ones were checking to see if the input fields were blank, and if they were, don't allow them to. Then you have to check that only logged in users can view content. I found my self reusing a lot of code, so in my helper methods, I did all the logic and redirection in the method declarations. This was my solution:
 ```
 def logged_in?
-      if session[:user_id] == nil
-        flash[:message] = "Please login first."
-        redirect to '/login'
-      end
-			true
- end
+   if session[:user_id] == nil
+      flash[:message] = "Please login first."
+      redirect to '/login'
+   end
+   true
+end
 ```
  
 Now, I could just insert one line of code to every place that requires this type of validation. Developer-friendly :)
@@ -36,5 +36,15 @@ Feel free to check my project out!
 Github Repo: [Sinatra College Textbooks](https://github.com/hejeong/college-textbooks-sinatra-project)
 
 The final (for now) product looks like this: 
+
+*Log In Page:*
+
+<img src="https://i.imgur.com/oB0mHFj.png" width="100%">
+
+*Index Page*
+
+<img src="https://i.imgur.com/NiAhG1O.png" width="100%">
+
+*Item Show Page*
 
 <img src="https://i.imgur.com/boprOIX.png" width="100%">
